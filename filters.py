@@ -112,7 +112,7 @@ def apply_rgb_filters(rgb_image, *,
         c_b = cv.LUT(c_b, blue_filter).astype(np.uint8)
     return cv.merge((c_r, c_g, c_b))
 
-def downscale_img(image : np.unit8, scale:float=0.5)->np.unit8:
+def downscale_img(image : np.uint8, scale:float=0.5)->np.uint8:
     """a python function to downscale an image
 
     Args:
