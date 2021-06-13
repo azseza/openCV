@@ -92,5 +92,12 @@ def segment_arm(frame: np.uint8, absolute_depth: int = 14) -> np.ndarray:
     ret, flooded = cv.threshold(flood, 129, 255, cv.THRESH_BINARY)
     return flooded
 
-
-        
+#Finding the hand countours 
+def find_hull_effects(segment: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+    coutours, hirarchy = cv.findContours(segment, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+    #choosing the biggest countours
+    max_contour = max(coutours, key=cv.contourArea)
+    #Minimizing edges of the biggest contour
+    e = 0.01 * cv.arcLength(max_contour, True)
+    max_contour = cv.approxPolyDP(max_contour, e, True)
+    
